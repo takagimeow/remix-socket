@@ -3,6 +3,7 @@ const express = require("express");
 const compression = require("compression");
 const morgan = require("morgan");
 const { createRequestHandler } = require("@remix-run/express");
+const { Server } = require("socket.io");
 
 const MODE = process.env.NODE_ENV;
 const BUILD_DIR = path.join(process.cwd(), "server/build");
@@ -29,10 +30,25 @@ app.all(
 );
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
 });
 
+const io = new Server(server);
+const ioMessages = io.of("/messages")
+ioMessages.on("connection", (socket) => {
+  console.log(`a user connected: ${socket.id}`);
+  socket.emit("serverMsg", `user: ${socket.id}`);
+  console.log("emitted");
+  socket.on("post", (message) => {
+    console.log("message: ", message);
+    socket.join(message.roomId);
+    ioMessages.to(message.roomId).emit("serverMsg", message);
+  })
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
 ////////////////////////////////////////////////////////////////////////////////
 function purgeRequireCache() {
   // purge require cache on requests for "server side HMR" this won't let
