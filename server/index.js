@@ -39,9 +39,7 @@ const ioMessages = io.of("/messages")
 ioMessages.on("connection", (socket) => {
   console.log(`a user connected: ${socket.id}`);
   socket.emit("serverMsg", `user: ${socket.id}`);
-  console.log("emitted");
   socket.on("post", (message) => {
-    console.log("message: ", message);
     socket.join(message.roomId);
     ioMessages.to(message.roomId).emit("serverMsg", message);
   })
