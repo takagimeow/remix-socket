@@ -25,7 +25,7 @@ export default function Index() {
     setSocket(socket);
     socket.on("serverMsg", (msg) => {
       if (msg.id) {
-        console.log("msg: ", msg);
+        // console.log("msg: ", msg);
         const filtered = messagesRef.current.filter(
           (item) => item.id !== msg.id
         );
@@ -69,7 +69,7 @@ export default function Index() {
         </div>
         {messages.map((message) => {
           return message.id === socket?.id ? null : (
-            <div className="h-full w-full relative">
+            <div key={message.id} className="h-full w-full relative">
               <MessageField id={message.id} text={message.message} />
               <div className="absolute bottom-0 right-0">{message.id}</div>
             </div>
