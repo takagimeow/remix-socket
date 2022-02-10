@@ -51,6 +51,7 @@ export function TextField({ id, text = "", onChange }: Props) {
       <div className="rounded-2xl">
         <div className="relative">
           <div
+            id="textField"
             ref={divRef}
             contentEditable={true}
             className={`max-w-full w-screen ${messageClassName} px-8 focus:outline-none text-3xl text-center rounded-2xl bg-blue-500 placeholder:text-blue-400 placeholder:text-sm sm:placeholder:text-3xl text-white align-middle table-cell ${
@@ -82,6 +83,7 @@ export function TextField({ id, text = "", onChange }: Props) {
           ></div>
           {value.length === 0 ? (
             <span
+              id="textFieldPlaceholder"
               className="absolute w-96 text-center top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-blue-400"
               onClick={() => {
                 setIsFocused(true);
