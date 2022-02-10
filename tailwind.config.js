@@ -10,7 +10,9 @@ module.exports = {
         "translate-bubble-a": "translate-bubble-a 0.55s ease-in-out",
         "invert-translate-bubble-a": "invert-translate-bubble-a 0.55s ease-in-out",
         "translate-bubble-b": "translate-bubble-b 0.55s ease-in-out",
-        "invert-translate-bubble-b": "invert-translate-bubble-b 0.55s ease-in-out"
+        "invert-translate-bubble-b": "invert-translate-bubble-b 0.55s ease-in-out",
+        "hover-room-text": "hover-room-text 0.55s ease-in-out",
+        "invert-hover-room-text": "invert-hover-room-text 0.55s ease-in-out"
       },
       keyframes: {
         "pulse-cursor": {
@@ -70,6 +72,22 @@ module.exports = {
           },
           "100%": {
             top: "4rem"
+          }
+        },
+        "hover-room-text": {
+          "0%": {
+            opacity: 1
+          },
+          "100%": {
+            opacity: 0.6,
+          }
+        },
+        "invert-hover-room-text": {
+          "0%": {
+            opacity: 0.6,
+          },
+          "100%": {
+            opacity: 1,
           }
         }
       }
