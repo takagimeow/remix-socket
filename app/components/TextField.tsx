@@ -16,10 +16,16 @@ export function TextField({ id, text = "", onChange }: Props) {
   const [messageClassName, setMessageClassName] = useState("");
   const [bubbleAClassName, setBubbleAClassName] = useState("");
   const [bubbleBClassName, setBubbleBClassName] = useState("");
+  const [lastValue, setLastValue] = useState<string | null>(null)
 
   useEffect(() => {
     console.log("value: ", value)
-    if (value.length === 0) {
+    if (!lastValue) {
+      setMessageClassName("h-12");
+      setBubbleAClassName("top-8");
+      setBubbleBClassName("top-16");
+    }
+    else if (value.length === 0) {
       setMessageClassName("animate-invert-stretch-height h-12");
       setBubbleAClassName("animate-invert-translate-bubble-a top-8");
       setBubbleBClassName("animate-invert-translate-bubble-b top-16");
@@ -27,6 +33,10 @@ export function TextField({ id, text = "", onChange }: Props) {
       setMessageClassName("animate-stretch-height h-48");
       setBubbleAClassName("animate-translate-bubble-a top-44");
       setBubbleBClassName("animate-translate-bubble-b top-52 ");
+    }
+    setLastValue(value)
+    return () => {
+      setLastValue(null);
     }
   }, [value]);
   return (
