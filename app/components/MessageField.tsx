@@ -47,6 +47,7 @@ export function MessageField({ id, text = "" }: Props) {
       <div className="rounded-2xl">
         <div className="relative">
           <div
+            id={`messageField-${id}`}
             ref={divRef}
             className={`max-w-full w-screen ${messageClassName} px-8 focus:outline-none text-3xl text-center rounded-2xl bg-gray-300 placeholder:text-gray-100 placeholder:text-sm sm:placeholder:text-3xl text-slate-600 align-middle table-cell ${
               text.length === 0 ? "caret-transparent" : ""
